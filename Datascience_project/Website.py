@@ -5,7 +5,7 @@ import altair as alt
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder
 
-df = pd.read_csv("Datascience_project/meals_with_spike_labels.csv")
+df = pd.read_csv("meals_with_spike_labels.csv")
 df = df.dropna(subset=["Spike"])
 
 features = ["Carbs", "Fat", "Protein", "Calories", "Fiber", "Age", "BMI", "Gender"]
