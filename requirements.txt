@@ -1,1 +1,8 @@
 joblib
+streamlit
+pandas
+numpy
+altair
+scikit-learn
+matplotlib
+seaborn
