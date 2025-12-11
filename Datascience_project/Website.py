@@ -4,8 +4,8 @@ import numpy as np
 import pandas as pd
 import altair as alt
 
-model = joblib.load("Datascience_project/glucose_model.pkl")
-gender_encoder = joblib.load("Datascience_project/gender_encoder.pkl")
+model = joblib.load("glucose_model.pkl")
+gender_encoder = joblib.load("gender_encoder.pkl")
 
 st.title("Glucose Spike Predictor")
 st.write("Please enter your meal and personal information to predict if your meal will cause a glucose spike.")
@@ -25,6 +25,13 @@ gender_on_website= gender_mapping[gender]
 
 gender_encoded= gender_encoder.transform([gender_on_website])[0]
 input_data= np.array([[carbs, fat, protein, calories, fiber, age, bmi, gender_encoded]])
+
+live_probobility= model.predict_proba(input_data)[0][1]
+live_percent = live_probobility * 100                        
+
+st.write("### 🔍 Live Spike Probability Preview")
+st.write(f"**{live_percent:.1f}% Spike Risk**")
+st.progress(live_probobility)
 
 if st.button("Predict Spike"):
     prediction= model.predict(input_data)
