@@ -3,9 +3,12 @@ import joblib
 import numpy as np
 import pandas as pd
 import altair as alt
+import os 
 
-model= joblib.load("glucose_model.pkl")
-gender_encoder= joblib.load("gender_encoder.pkl")
+BASE_DIR = os.path.dirname(__file__)
+
+model = joblib.load(os.path.join(BASE_DIR, "glucose_model.pkl"))
+gender_encoder = joblib.load(os.path.join(BASE_DIR, "gender_encoder.pkl"))
 
 st.title("Glucose Spike Predictor")
 st.write("Please enter your meal and personal information to predict if your meal will cause a glucose spike.")
