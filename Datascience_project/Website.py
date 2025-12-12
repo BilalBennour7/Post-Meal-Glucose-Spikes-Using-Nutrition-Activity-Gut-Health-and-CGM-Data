@@ -5,14 +5,31 @@ import pandas as pd
 import altair as alt
 import requests
 
-if "initialized" not in st.session_state:
-    st.query_params = {"page": "input"}
-    st.session_state["initialized"] = True
-
 page= st.query_params.get("page", "input")
 
 model = joblib.load("Datascience_project/glucose_model.pkl")
 gender_encoder = joblib.load("Datascience_project/gender_encoder.pkl")
+
+
+def compute_feature_impact(model, base_input, feature_names):
+    base_prob = model.predict_proba(base_input)[0][1]
+    rows = []
+
+    for i, name in enumerate(feature_names):
+        modified= base_input.copy()
+        modified[0, i]= 0
+        new_prob= model.predict_proba(modified)[0][1]
+
+        delta= (base_prob- new_prob) * 100
+
+        rows.append({
+            "Feature": name,
+            "Effect (%)": abs(delta),
+            "Direction": "Increases Risk" if delta> 0 else "Reduces Risk"
+        })
+
+    return pd.DataFrame(rows)
+
 
 if page=="input":
     st.title("Glucose Spike Predictor")
@@ -182,6 +199,35 @@ if page== "results":
     )
 
     st.altair_chart(chart, width="stretch")
+
+    st.write("### How Each Factor Affected Your Spike Risk")
+
+    feature_names = [
+        "Carbs", "Fat", "Protein", "Calories",
+        "Fiber", "Age", "BMI", "Gender"
+    ]
+
+    impact_df = compute_feature_impact(model, input_data, feature_names)
+
+    impact_chart = (
+        alt.Chart(impact_df)
+        .mark_bar()
+        .encode(
+            x=alt.X("Effect (%)", title="Effect on Spike Risk (%)"),
+            y=alt.Y("Feature", sort="-x"),
+            color=alt.Color(
+                "Direction",
+                scale=alt.Scale(
+                    domain=["Increases Risk", "Reduces Risk"],
+                    range=["crimson", "seagreen"]
+                )
+            ),
+            tooltip=["Feature", "Effect (%)", "Direction"]
+        )
+    )
+
+    st.altair_chart(impact_chart, width="stretch")
+
 
     st.write("### Personalized Meal Advice")
 
