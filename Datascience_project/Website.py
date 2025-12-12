@@ -14,14 +14,81 @@ if page=="input":
     st.title("Glucose Spike Predictor")
     st.write("Please enter your meal and personal information to predict if your meal will cause a glucose spike. If no value is entered it is defaulted as zero. ")
 
-    carbs = st.number_input("Carbohydrates (g)", min_value=None, value=None, placeholder="ex: 45")
-    fat = st.number_input("Fat (g)", min_value=None, value=None, placeholder="ex: 20")
-    protein = st.number_input("Protein (g)", min_value=None, value=None, placeholder="ex: 30")
-    calories = st.number_input("Calories", min_value=None, value=None, placeholder="ex: 500")
-    fiber = st.number_input("Fiber (g)", min_value=None, value=None, placeholder="ex: 7")
+    st.markdown("Carbohydrates (g)", help="Carbs raise blood glucose the fastest.")
 
-    age = st.number_input("Age", min_value=None, value=None, placeholder="ex: 22")
-    bmi = st.number_input("BMI", min_value=None, value=None, placeholder="ex: 25")
+    carbs = st.number_input(
+        "", 
+        key="carbs_input",
+        min_value=None, 
+        value=None, 
+        placeholder="ex: 45",
+        label_visibility="collapsed"
+    )
+
+    st.markdown("Fat (g) ", help="Fat slows digestion and reduces glucose spike speed.")
+
+    fat = st.number_input(
+        "",
+        key="fat_input",
+        min_value=None,
+        value=None,
+        placeholder="ex: 20",
+        label_visibility="collapsed"
+    )
+    st.markdown("Protein (g) ", help="Protein stabilizes glucose by slowing digestion.")
+
+    protein = st.number_input(
+        "",
+        key="protein_input",
+        min_value=None,
+        value=None,
+        placeholder="ex: 30",
+        label_visibility="collapsed"
+    )
+
+    st.markdown("Calories ", help="Higher calories often mean more carbs, which can affect glucose levels.")
+
+    calories = st.number_input(
+        "",
+        key="cal_input",
+        min_value=None,
+        value=None,
+        placeholder="ex: 500",
+        label_visibility="collapsed"
+    )
+    st.markdown("Fiber (g) ", help="Fiber reduces glucose spikes by slowing carb absorption.")
+
+    fiber = st.number_input(
+        "",
+        key="fiber_input",
+        min_value=None,
+        value=None,
+        placeholder="ex: 7",
+        label_visibility="collapsed"
+    )
+
+    st.markdown("Age ", help="Age impacts insulin sensitivity.")
+
+    age = st.number_input(
+        "",
+        key="age_input",
+        min_value=None,
+        value=None,
+        placeholder="ex: 22",
+        label_visibility="collapsed"
+    )    
+
+    st.markdown("BMI ", help="Higher BMI may increase spike risk.")
+
+    bmi = st.number_input(
+        "",
+        key="bmi_input",
+        min_value=None,
+        value=None,
+        placeholder="ex: 25",
+        label_visibility="collapsed"
+    )
+
     gender = st.selectbox("Gender", ["Male", "Female"])
 
     carbs = carbs or 0
@@ -41,11 +108,17 @@ if page=="input":
     live_probobility= model.predict_proba(input_data)[0][1]
     live_percent = live_probobility * 100                        
 
-    st.write("### Live Spike Probability Preview")
+    st.markdown(
+        "### Live Spike Probability Preview",
+        help=(
+            "This shows a real-time glucose spike risk prediction based on the "
+            "values you enter. Adjust carbs, fat, protein, fiber, or other inputs "
+            "to instantly see how the spike percentage changes!"
+        )
+    )
     st.write(f"**{live_percent:.1f}% Spike Risk**")
     st.progress(live_probobility)
  
-
     if st.button("Predict Spike"):
         prediction= model.predict(input_data)
         probability= model.predict_proba(input_data)[0]
@@ -88,7 +161,6 @@ if page== "results":
     else:
         st.success("This meal will likely not cause a glucose spike.")
 
-    # Probability chart
     prob_df = pd.DataFrame({
         "Outcome": ["No Spike", "Spike"],
         "Probability": [probability[0], probability[1]]
@@ -107,7 +179,6 @@ if page== "results":
 
     st.altair_chart(chart, width="stretch")
 
-    # Advice
     st.write("### Personalized Meal Advice")
 
     if prediction == 1:
@@ -127,7 +198,6 @@ if page== "results":
         if fat < 20:
             st.write("- Healthy fat levels help with glucose control.")
 
-    # Back button
     if st.button("Go Back"):
         st.query_params = {"page": "input"}
         st.rerun()
