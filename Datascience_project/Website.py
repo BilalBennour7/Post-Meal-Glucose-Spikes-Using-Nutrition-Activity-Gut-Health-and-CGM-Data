@@ -7,8 +7,8 @@ import requests
 
 page= st.query_params.get("page", "input")
 
-model = joblib.load("glucose_model.pkl")
-gender_encoder = joblib.load("gender_encoder.pkl")
+model = joblib.load("Datascience_project/glucose_model.pkl")
+gender_encoder = joblib.load("Datascience_project/gender_encoder.pkl")
 
 if page=="input":
     st.title("Glucose Spike Predictor")
