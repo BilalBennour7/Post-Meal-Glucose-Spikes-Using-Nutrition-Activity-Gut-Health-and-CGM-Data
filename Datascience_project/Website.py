@@ -226,7 +226,7 @@ if page=="input":
 
     if mode=="Food and Beverage Lookup":
  
-        st.subheader("Food & Beverage Lookup")
+        st.subheader("Food & Beverage Finder")
 
         food_query = st.text_input("Search for any food or drink", help="Please make sure to be as specific as possible. For example, instead of just saying 'steak' say 'ribeye steak'.")
 
