@@ -94,7 +94,7 @@ if page=="input":
 
 
     if mode=="Manual Meal Entry":
-        st.write("Please enter your meals nutritional content to predict if your meal will cause a glucose spike. If no value is entered it is defaulted as zero. ")
+        st.write("Please enter your meals nutritional content to predict whether or not it will cause a glucose spike. If no value is entered it is defaulted as zero. ")
 
         st.markdown("Carbohydrates (g)", help="Carbs raise blood glucose the fastest.")
 
