@@ -80,20 +80,20 @@ if page=="input":
     st.title("Glucose Spike Predictor")
 
     if "input_mode" not in st.session_state:
-        st.session_state["input_mode"] = "Manual Food Logger"
+        st.session_state["input_mode"] = "Manual Nutrition Entry"
 
     st.sidebar.title("Tabs")
 
     mode = st.sidebar.radio(
         "Choose which tab you'd like to go to!",
-        ["Manual Food Logger", "Food Lookup"],
-        index=["Manual Food Logger", "Food Lookup"].index(st.session_state["input_mode"])
+        ["Manual Nutrition Entry", "Food and Beverage Lookup"],
+        index=["Manual Nutrition Entry", "Food and Beverage"].index(st.session_state["input_mode"])
     )
 
     st.session_state["input_mode"] = mode
 
 
-    if mode=="Manual Food Logger":
+    if mode=="Manual Nutrition Entry":
         st.write("Please enter your meal and personal information to predict if your meal will cause a glucose spike. If no value is entered it is defaulted as zero. ")
 
         st.markdown("Carbohydrates (g)", help="Carbs raise blood glucose the fastest.")
@@ -224,7 +224,7 @@ if page=="input":
             st.query_params= {"page": "results"}
             st.rerun() 
 
-    if mode=="Food Lookup":
+    if mode=="Food and Beverage Lookup":
  
         st.subheader("Food & Beverage Lookup")
 
@@ -250,7 +250,7 @@ if page=="input":
                 scale = grams / 100
 
                 row = {
-                    "Food": selected,
+                    "Food/Drink": selected,
                     "Grams": grams,
                     "Carbs (g)": round(macros["carbs"] * scale, 2),
                     "Fat (g)": round(macros["fat"] * scale, 2),
@@ -269,7 +269,7 @@ if page=="input":
                 "Carbs (g)", "Fat (g)", "Protein (g)", "Calories", "Fiber (g)"]].sum()
 
             total_row = {
-                "Food": "TOTAL",
+                "Food/Drink": "TOTAL",
                 "Grams": df["Grams"].sum(),
                 "Carbs (g)": round(totals["Carbs (g)"], 2),
                 "Fat (g)": round(totals["Fat (g)"], 2),
@@ -294,12 +294,12 @@ if page=="input":
                         default=False
                     )
                 },
-                disabled=["Food"] if "TOTAL" in df_display["Food"].values else []
+                disabled=["Food/Drink"] if "TOTAL" in df_display["Food/Drink"].values else []
             )
 
             if st.button("Remove Selected Rows"):
                 cleaned = edited_df[
-                    (~edited_df["Delete"]) & (edited_df["Food"] != "TOTAL")].drop(columns=["Delete"])
+                    (~edited_df["Delete"]) & (edited_df["Food/Drink"] != "TOTAL")].drop(columns=["Delete"])
 
                 st.session_state["meal_log"] = cleaned.to_dict("records")
                 st.rerun()
