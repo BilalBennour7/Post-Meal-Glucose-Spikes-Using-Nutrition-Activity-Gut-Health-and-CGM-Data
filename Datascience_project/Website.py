@@ -242,7 +242,7 @@ if page== "results":
             st.write("- Healthy fats (olive oil, nuts) help slow digestion.")
         st.write("- Light activity after eating can help reduce spike.")
     else:
-        st.write("- Great macro balance! Protein and fiber helps keep glucose stable.")
+        st.write("- Great macro balance!")
         if carbs < 30:
             st.write("- Moderate carbs contribute to stability.")
         if fat < 20:
