@@ -160,7 +160,7 @@ if page=="input":
             label_visibility="collapsed"
         )    
 
-        st.markdown("BMI ", help="BMI is a calculation based on height and weight to estimate body fat. Higher BMI may increase spike risk.")
+        st.markdown("BMI ", help="BMI is a calculation based on height and weight to estimate body fat. Higher BMI may increase the risk of a glucose spike.")
 
         bmi = st.number_input(
             "",
