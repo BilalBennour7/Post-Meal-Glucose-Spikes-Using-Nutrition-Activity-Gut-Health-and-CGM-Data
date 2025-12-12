@@ -235,9 +235,10 @@ if page== "results":
     st.altair_chart(impact_chart, width="stretch")
 
 
-    st.write("### Personalized Meal Advice")
+    
 
     if prediction == 1:
+        st.write("### Personalized Meal Advice")
         if carbs > 40:
             st.write("- Carbs are quite high. Reduce portion size or choose lower-GI carbs.")
         if fiber < 5:
@@ -247,12 +248,7 @@ if page== "results":
         if fat < 10:
             st.write("- Healthy fats (olive oil, nuts) help slow digestion.")
         st.write("- Light activity after eating can help reduce spike.")
-    else:
-        st.write("- Great macro balance!")
-        if carbs < 30:
-            st.write("- Moderate carbs contribute to stability.")
-        if fat < 20:
-            st.write("- Healthy fat levels help with glucose control.")
+    
 
     if st.button("Go Back"):
         st.query_params = {"page": "input"}
