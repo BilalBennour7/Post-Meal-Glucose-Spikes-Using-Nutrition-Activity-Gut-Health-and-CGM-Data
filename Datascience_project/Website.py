@@ -347,7 +347,7 @@ if page=="input":
             st.progress(live_prob)
 
 
-            if st.button("Spike prediction From This Meal"):
+            if st.button("Glucose Spike Prediction for This Meal"):
                 st.session_state["previous_page"] = "input"
 
                 st.session_state.update({
