@@ -35,7 +35,7 @@ if page=="input":
     st.title("Glucose Spike Predictor")
     st.write("Please enter your meal and personal information to predict if your meal will cause a glucose spike. If no value is entered it is defaulted as zero. ")
 
-    st.markdown("Carbohydrates: (g)", help="Carbs raise blood glucose the fastest.")
+    st.markdown("Carbohydrates (g)", help="Carbs raise blood glucose the fastest.")
 
     carbs = st.number_input(
         "", 
@@ -46,7 +46,7 @@ if page=="input":
         label_visibility="collapsed"
     )
 
-    st.markdown("Fat (g): ", help="Fat slows digestion and reduces glucose spike speed.")
+    st.markdown("Fat (g) ", help="Fat slows digestion and reduces glucose spike speed.")
 
     fat = st.number_input(
         "",
@@ -56,7 +56,7 @@ if page=="input":
         placeholder="ex: 20",
         label_visibility="collapsed"
     )
-    st.markdown("Protein (g): ", help="Protein stabilizes glucose by slowing digestion.")
+    st.markdown("Protein (g) ", help="Protein stabilizes glucose by slowing digestion.")
 
     protein = st.number_input(
         "",
@@ -67,7 +67,7 @@ if page=="input":
         label_visibility="collapsed"
     )
 
-    st.markdown("Calories: ", help="Higher calories often mean more carbs, which can affect glucose levels.")
+    st.markdown("Calories ", help="Higher calories often mean more carbs, which can affect glucose levels.")
 
     calories = st.number_input(
         "",
@@ -77,7 +77,7 @@ if page=="input":
         placeholder="ex: 500",
         label_visibility="collapsed"
     )
-    st.markdown("Fiber (g): ", help="Fiber reduces glucose spikes by slowing carb absorption.")
+    st.markdown("Fiber (g) ", help="Fiber reduces glucose spikes by slowing carb absorption.")
 
     fiber = st.number_input(
         "",
@@ -88,7 +88,7 @@ if page=="input":
         label_visibility="collapsed"
     )
 
-    st.markdown("Age: ", help="Age impacts insulin sensitivity.")
+    st.markdown("Age ", help="Age impacts insulin sensitivity.")
 
     age = st.number_input(
         "",
@@ -99,7 +99,7 @@ if page=="input":
         label_visibility="collapsed"
     )    
 
-    st.markdown("BMI: ", help="Higher BMI may increase spike risk.")
+    st.markdown("BMI ", help="Higher BMI may increase spike risk.")
 
     bmi = st.number_input(
         "",
