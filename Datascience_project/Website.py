@@ -5,6 +5,10 @@ import pandas as pd
 import altair as alt
 import requests
 
+if "initialized" not in st.session_state:
+    st.query_params = {"page": "input"}
+    st.session_state["initialized"] = True
+
 page= st.query_params.get("page", "input")
 
 model = joblib.load("Datascience_project/glucose_model.pkl")
