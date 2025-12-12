@@ -80,21 +80,21 @@ if page=="input":
     st.title("Glucose Spike Predictor")
 
     if "input_mode" not in st.session_state:
-        st.session_state["input_mode"] = "Manual Nutrition Entry"
+        st.session_state["input_mode"] = "Manual Meal Entry"
 
     st.sidebar.title("Tabs")
 
     mode = st.sidebar.radio(
         "Choose which tab you'd like to go to!",
-        ["Manual Nutrition Entry", "Food and Beverage Lookup"],
-        index=["Manual Nutrition Entry", "Food and Beverage Lookup"].index(st.session_state["input_mode"])
+        ["Manual Meal Entry", "Food and Drink Finder"],
+        index=["Manual Meal Entry", "Food and Drink Finder"].index(st.session_state["input_mode"])
     )
 
     st.session_state["input_mode"] = mode
 
 
-    if mode=="Manual Nutrition Entry":
-        st.write("Please enter your meal and personal information to predict if your meal will cause a glucose spike. If no value is entered it is defaulted as zero. ")
+    if mode=="Manual Meal Entry":
+        st.write("Please enter your meals nutritional content to predict if your meal will cause a glucose spike. If no value is entered it is defaulted as zero. ")
 
         st.markdown("Carbohydrates (g)", help="Carbs raise blood glucose the fastest.")
 
@@ -224,9 +224,9 @@ if page=="input":
             st.query_params= {"page": "results"}
             st.rerun() 
 
-    if mode=="Food and Beverage Lookup":
+    if mode=="Food and Drink Finder":
  
-        st.subheader("Food & Beverage Finder")
+        st.subheader("Food & Beverage Lookup")
 
         food_query = st.text_input("Search for any food or drink", help="Please make sure to be as specific as possible. For example, instead of just saying 'steak' say 'ribeye steak'.")
 
