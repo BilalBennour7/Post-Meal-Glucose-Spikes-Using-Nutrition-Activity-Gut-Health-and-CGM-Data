@@ -94,9 +94,9 @@ if page=="input":
 
 
     if mode=="Manual Meal Entry":
-        st.write("Please enter your meals nutritional content to predict whether or not it will cause a glucose spike. If no value is entered it is defaulted as zero. ")
+        st.write("Please enter your meals nutritional content to predict whether or not it will cause a glucose spike. If no value is entered it is defaulted to zero. ")
 
-        st.markdown("Carbohydrates (g)", help="Carbs raise blood glucose the fastest.")
+        st.markdown("Carbohydrates (grams)", help="Carbs raise blood glucose the fastest.")
 
         carbs = st.number_input(
             "", 
@@ -107,7 +107,7 @@ if page=="input":
             label_visibility="collapsed"
         )
 
-        st.markdown("Fat (g) ", help="Fat slows digestion and reduces glucose spike speed.")
+        st.markdown("Fat (grams) ", help="Fat slows digestion and reduces glucose spike speed.")
 
         fat = st.number_input(
             "",
@@ -117,7 +117,7 @@ if page=="input":
             placeholder="ex: 20",
             label_visibility="collapsed"
         )
-        st.markdown("Protein (g) ", help="Protein stabilizes glucose by slowing digestion.")
+        st.markdown("Protein (grams) ", help="Protein stabilizes glucose by slowing digestion.")
 
         protein = st.number_input(
             "",
@@ -138,7 +138,7 @@ if page=="input":
             placeholder="ex: 500",
             label_visibility="collapsed"
         )
-        st.markdown("Fiber (g) ", help="Fiber reduces glucose spikes by slowing carb absorption.")
+        st.markdown("Fiber (grams) ", help="Fiber reduces glucose spikes by slowing carb absorption.")
 
         fiber = st.number_input(
             "",
