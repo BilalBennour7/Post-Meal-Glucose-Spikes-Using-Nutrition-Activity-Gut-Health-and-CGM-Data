@@ -78,6 +78,10 @@ if "meal_log" not in st.session_state:
 
 if page=="input":
     st.title("Glucose Spike Predictor")
+
+    if "input_mode" not in st.session_state:
+        st.session_state["input_mode"] = "Manual Food Logger"
+
     st.sidebar.title("Tabs")
 
     mode = st.sidebar.radio(
