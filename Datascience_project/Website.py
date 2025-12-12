@@ -67,7 +67,7 @@ def compute_feature_impact(model, base_input, feature_names):
         rows.append({
             "Feature": name,
             "Effect (%)": abs(delta),
-            "Outcome": "Increases Risk" if delta> 0 else "Reduces Risk"
+            "Impact": "Increases Risk" if delta> 0 else "Reduces Risk"
         })
 
     return pd.DataFrame(rows)
@@ -426,13 +426,13 @@ if page== "results":
             x=alt.X("Effect (%)", title="Effect on Spike Risk (%)"),
             y=alt.Y("Feature", sort="-x"),
             color=alt.Color(
-                "Outcome",
+                "Impact",
                 scale=alt.Scale(
                     domain=["Increases Risk", "Reduces Risk"],
                     range=["crimson", "seagreen"]
                 )
             ),
-            tooltip=["Feature", "Effect (%)", "Outcome"]
+            tooltip=["Feature", "Effect (%)", "Impact"]
         )
     )
 
