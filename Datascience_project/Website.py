@@ -87,7 +87,7 @@ if page=="input":
     mode = st.sidebar.radio(
         "Choose which tab you'd like to go to!",
         ["Manual Nutrition Entry", "Food and Beverage Lookup"],
-        index=["Manual Nutrition Entry", "Food and Beverage"].index(st.session_state["input_mode"])
+        index=["Manual Nutrition Entry", "Food and Beverage Lookup"].index(st.session_state["input_mode"])
     )
 
     st.session_state["input_mode"] = mode
